@@ -1,0 +1,6 @@
+{
+  "name": "string or null",
+  "email": "string or null",
+  "issue_type": "billing | technical | account | other",
+  "urgency": "low | medium | high"
+}

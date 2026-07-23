@@ -1,0 +1,30 @@
+{
+  "test_1": {
+    "input": "Hi, I'm Ahmed, ahmed@gmail.com. My app crashes every time I open it. Please help ASAP!",
+    "raw_output": "{\"name\": \"Ahmed\", \"email\": \"ahmed@gmail.com\", \"issue_type\": \"technical\", \"urgency\": \"high\"}"
+  },
+  "test_2": {
+    "input": "You charged me twice this month, can someone check?",
+    "raw_output": "{\"name\": null, \"email\": null, \"issue_type\": \"billing\", \"urgency\": \"medium\"}"
+  },
+  "test_3": {
+    "input": "I can't log into my account, forgot password isn't working.",
+    "raw_output": "{\"name\": null, \"email\": null, \"issue_type\": \"account\", \"urgency\": \"medium\"}"
+  },
+  "test_4": {
+    "input": "Just curious, do you guys have a dark mode planned?",
+    "raw_output": "{\"name\": null, \"email\": null, \"issue_type\": \"other\", \"urgency\": \"low\"}"
+  },
+  "test_5": {
+    "input": "URGENT!! Sara here (sara99@yahoo.com) - payment failed and I'm locked out completely!!",
+    "raw_output": "{\"name\": \"Sara\", \"email\": \"sara99@yahoo.com\", \"issue_type\": \"billing\", \"urgency\": \"high\"}"
+  },
+  "tricky_before_fix": {
+    "input": "idk my thing is broken lol also whats ur refund policy?? btw im [name redacted] pls call me at 03001234567",
+    "raw_output": "Sure! Here's the extracted JSON:\n{\"name\": null, \"email\": null, \"issue_type\": \"technical\", \"urgency\": \"low\"}"
+  },
+  "tricky_after_fix": {
+    "input": "idk my thing is broken lol also whats ur refund policy?? btw im [name redacted] pls call me at 03001234567",
+    "raw_output": "{\"name\": null, \"email\": null, \"issue_type\": \"billing\", \"urgency\": \"medium\"}"
+  }
+}
