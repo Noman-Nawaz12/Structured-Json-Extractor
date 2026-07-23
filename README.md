@@ -19,42 +19,65 @@ A prompt-engineering project that forces any LLM to return clean, predictable, s
 📊 Clear PASS/FAIL summary report
 
 🏗️ System Architecture
+
               Raw Customer Message
+              
                       │
+                    
                       ▼
             Prompt Template Injection
+            
           (schema + strict JSON rules)
+          
                       │
                       ▼
                 LLM (Claude API)
+                
                       │
                       ▼
               Raw Model Output
+              
                       │
                       ▼
              json.loads() Parse Check
+             
                       │
+                      
             ┌─────────┴─────────┐
             ▼                   ▼
+            
       Parse Success        Parse Failure
+      
             │                   │
             ▼                   ▼
+            
     Schema Validation      ❌ FAIL (logged)
     (fields + enums)
+    
             │
+            
       ┌─────┴─────┐
       ▼           ▼
+
+      
   ✅ PASS      ❌ FAIL
+  
                 (invalid field/enum)
 
 📂 Project Structure
+
 structured-json-extractor/
 │
 ├── schema.json                  # Target JSON schema definition
+
 ├── prompt_template.txt          # Strict JSON-only prompt sent to the LLM
+
 ├── recorded_responses.json      # Test inputs + captured model outputs
+
 ├── validate.py                  # Parses & validates recorded responses (no API key needed)
+
 ├── test_structured_output.py    # Calls the live Anthropic API and validates output
+
 └── README.md
 
 🛠️ Tech Stack
@@ -77,12 +100,19 @@ Core Rule
 The model is instructed to respond with ONLY valid JSON — no explanation, no markdown fences, no preamble.
 
 Schema Enforced
+
 {
+
   "name": "string or null",
+  
   "email": "string or null",
+  
   "issue_type": "billing | technical | account | other",
+  
   "urgency": "low | medium | high"
+  
 }
+
 
 Purpose:
 
@@ -94,8 +124,11 @@ Forces issue_type and urgency to always resolve to a valid enum value, never nul
 
 
 ⚙️ Installation
+
 1. Clone / Download the Project
+2. 
 git clone https://github.com/yourusername/structured-json-extractor.git
+
 
 cd structured-json-extractor
 
@@ -103,17 +136,21 @@ cd structured-json-extractor
 Windows
 
 python -m venv venv
+
 venv\Scripts\activate
 
 Linux / macOS
 
 python3 -m venv venv
+
 source venv/bin/activate
 
 3. No extra dependencies needed for offline validation
+4. 
 validate.py uses only Python's built-in json module.
 
-4. (Optional) Configure Anthropic API Key — for live testing
+5. (Optional) Configure Anthropic API Key — for live testing
+6. 
 Windows
 
 set ANTHROPIC_API_KEY=your_api_key_here
@@ -123,9 +160,11 @@ Linux / macOS
 export ANTHROPIC_API_KEY=your_api_key_here
 
 5. Run the Validator
-python3 validate.py
+ 
+6.python3 validate.py
 
 Or run live against the real API:
+
 python3 test_structured_output.py
 
 💡 How It Works
@@ -192,26 +231,40 @@ Everything else uses Python's standard library (json, os, urllib).
 📊 Test Results
 
 Test Case               Result
+
 test_1 (technical)      ✅ PASS
+
 test_2 (billing)        ✅ PASS
+
 test_3 (account)        ✅ PASS
+
 test_4 (other)          ✅ PASS
+
 test_5 (billing, high)  ✅ PASS
+
 tricky_before_fix       ❌ FAIL (extra text broke JSON parsing)
+
 tricky_after_fix        ✅ PASS (fixed with stricter prompt rules)
+
 
 Final Score: 6 / 7 passed (1 intentional failure demonstrated before the fix)
 
 🎯 Use Cases
 
 Customer support ticket automation
+
 Chatbot-to-database data pipelines
+
 Form-filling from unstructured text
+
 Lead qualification from inbound messages
+
 Email triage and categorization
+
 Any app needing reliable LLM → JSON handoff
 
 👨‍💻 Author
+
 [Noman Nawaz]
 
 Learning Prompt Engineering & Structured Outputs
