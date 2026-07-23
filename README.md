@@ -1,7 +1,9 @@
 📄 Structured JSON Extractor
+
 A prompt-engineering project that forces any LLM to return clean, predictable, schema-valid JSON from messy natural-language input — no extra text, no broken parsing. Upload a raw customer support message and get back structured ticket data ready to plug straight into an app.
 
 🚀 Features
+
 🎯 Enforced JSON-only output from any LLM prompt
 📐 Custom-designed JSON schema for a real use case
 🧪 Automated validation against the schema (type + enum checks)
